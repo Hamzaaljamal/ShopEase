@@ -3,70 +3,247 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>موقع ثنائي اللغة | Bilingual Site</title>
+<title>متجر إلكتروني ثنائي اللغة | Bilingual E-commerce</title>
 <style>
+  /* Reset */
+  * {
+    margin: 0; padding: 0; box-sizing: border-box;
+  }
   body {
-    font-family: Arial, sans-serif;
-    margin: 20px;
-    transition: direction 0.3s ease;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #f9f9f9;
+    color: #222;
+    line-height: 1.6;
+    transition: direction 0.3s ease, font-family 0.3s ease;
+    padding: 20px;
   }
-  .lang-toggle {
-    margin-bottom: 20px;
-  }
-  .ar {
+  body.ar {
     direction: rtl;
-    text-align: right;
+    font-family: 'Tahoma', 'Arial', sans-serif;
   }
-  .en {
-    direction: ltr;
-    text-align: left;
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
   }
+  .logo {
+    font-weight: bold;
+    font-size: 1.5rem;
+    color: #1a73e8;
+  }
+  nav ul {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+  }
+  nav ul li {
+    cursor: pointer;
+  }
+  nav ul li a {
+    text-decoration: none;
+    color: #333;
+    font-weight: 600;
+    transition: color 0.3s;
+  }
+  nav ul li a:hover {
+    color: #1a73e8;
+  }
+  .lang-toggle button {
+    padding: 8px 14px;
+    background: #1a73e8;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: 600;
+  }
+  main {
+    max-width: 960px;
+    margin: 0 auto;
+  }
+  .products {
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(220px,1fr));
+    gap: 20px;
+  }
+  .product-card {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgb(0 0 0 / 0.1);
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .product-card img {
+    width: 100%;
+    border-radius: 8px;
+    object-fit: cover;
+    max-height: 150px;
+  }
+  .product-name {
+    font-weight: bold;
+    margin: 10px 0 6px;
+  }
+  .product-desc {
+    font-size: 0.9rem;
+    color: #555;
+    flex-grow: 1;
+  }
+  .product-price {
+    font-weight: 700;
+    color: #1a73e8;
+    margin: 10px 0;
+  }
+  .add-to-cart {
+    padding: 8px;
+    background: #1a73e8;
+    border: none;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: 600;
+  }
+  /* Hidden by default */
   .hidden {
     display: none;
   }
-  button {
-    padding: 8px 12px;
-    cursor: pointer;
+  /* Responsive */
+  @media (max-width: 600px) {
+    header {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 10px;
+    }
+    nav ul {
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+  }
+  /* RTL adjustments */
+  body.ar nav ul {
+    flex-direction: row-reverse;
+  }
+  body.ar .product-card {
+    text-align: right;
+  }
+  body.ar .lang-toggle {
+    order: -1;
   }
 </style>
 </head>
-<body class="en">
+<body class="en" lang="en" dir="ltr">
 
-<div class="lang-toggle">
-  <button id="toggleLang">عربي</button>
-</div>
+<header>
+  <div class="logo">
+    <span class="en-text">ShopEase</span>
+    <span class="ar-text hidden">شوب إيز</span>
+  </div>
+  <nav>
+    <ul>
+      <li><a href="#" class="en-text">Home</a><a href="#" class="ar-text hidden">الرئيسية</a></li>
+      <li><a href="#" class="en-text">Products</a><a href="#" class="ar-text hidden">المنتجات</a></li>
+      <li><a href="#" class="en-text">Cart</a><a href="#" class="ar-text hidden">السلة</a></li>
+      <li><a href="#" class="en-text">Contact</a><a href="#" class="ar-text hidden">اتصل بنا</a></li>
+    </ul>
+  </nav>
+  <div class="lang-toggle">
+    <button id="toggleLang">عربي</button>
+  </div>
+</header>
 
-<h1 class="en-text">Welcome to our website</h1>
-<h1 class="ar-text hidden">مرحبا بكم في موقعنا</h1>
+<main>
+  <section class="products">
+    <!-- Product 1 -->
+    <div class="product-card">
+      <img src="https://via.placeholder.com/300x150?text=Product+1" alt="Product 1" />
+      <h3 class="product-name en-text">Wireless Headphones</h3>
+      <h3 class="product-name ar-text hidden">سماعات لاسلكية</h3>
+      <p class="product-desc en-text">High quality wireless headphones with noise cancellation.</p>
+      <p class="product-desc ar-text hidden">سماعات لاسلكية عالية الجودة مع خاصية إلغاء الضوضاء.</p>
+      <div class="product-price en-text">$59.99</div>
+      <div class="product-price ar-text hidden">٥٩٫٩٩ $</div>
+      <button class="add-to-cart en-text">Add to Cart</button>
+      <button class="add-to-cart ar-text hidden">أضف إلى السلة</button>
+    </div>
 
-<p class="en-text">
-  This is a simple bilingual website example.
-</p>
-<p class="ar-text hidden">
-  هذا مثال بسيط لموقع يدعم لغتين.
-</p>
+    <!-- Product 2 -->
+    <div class="product-card">
+      <img src="https://via.placeholder.com/300x150?text=Product+2" alt="Product 2" />
+      <h3 class="product-name en-text">Running Shoes</h3>
+      <h3 class="product-name ar-text hidden">أحذية رياضية</h3>
+      <p class="product-desc en-text">Comfortable and lightweight running shoes for daily use.</p>
+      <p class="product-desc ar-text hidden">أحذية رياضية مريحة وخفيفة الوزن للاستخدام اليومي.</p>
+      <div class="product-price en-text">$89.99</div>
+      <div class="product-price ar-text hidden">٨٩٫٩٩ $</div>
+      <button class="add-to-cart en-text">Add to Cart</button>
+      <button class="add-to-cart ar-text hidden">أضف إلى السلة</button>
+    </div>
+
+    <!-- Product 3 -->
+    <div class="product-card">
+      <img src="https://via.placeholder.com/300x150?text=Product+3" alt="Product 3" />
+      <h3 class="product-name en-text">Smart Watch</h3>
+      <h3 class="product-name ar-text hidden">ساعة ذكية</h3>
+      <p class="product-desc en-text">Track your fitness and stay connected with this smart watch.</p>
+      <p class="product-desc ar-text hidden">تابع لياقتك وابق متصلاً مع هذه الساعة الذكية.</p>
+      <div class="product-price en-text">$129.99</div>
+      <div class="product-price ar-text hidden">١٢٩٫٩٩ $</div>
+      <button class="add-to-cart en-text">Add to Cart</button>
+      <button class="add-to-cart ar-text hidden">أضف إلى السلة</button>
+    </div>
+  </section>
+
+  <section class="cart-summary" style="margin-top: 40px;">
+    <h2 class="en-text">Shopping Cart</h2>
+    <h2 class="ar-text hidden">عربة التسوق</h2>
+    <p class="en-text">Your cart is empty.</p>
+    <p class="ar-text hidden">سلتك فارغة.</p>
+  </section>
+</main>
 
 <script>
   const toggleBtn = document.getElementById('toggleLang');
   const body = document.body;
-  const enTexts = document.querySelectorAll('.en-text');
-  const arTexts = document.querySelectorAll('.ar-text');
+
+  function switchLanguage(toLang) {
+    if(toLang === 'ar') {
+      body.classList.add('ar');
+      body.classList.remove('en');
+      body.setAttribute('lang', 'ar');
+      body.setAttribute('dir', 'rtl');
+      toggleBtn.textContent = 'English';
+      toggleTextVisibility('ar');
+    } else {
+      body.classList.add('en');
+      body.classList.remove('ar');
+      body.setAttribute('lang', 'en');
+      body.setAttribute('dir', 'ltr');
+      toggleBtn.textContent = 'عربي';
+      toggleTextVisibility('en');
+    }
+  }
+
+  function toggleTextVisibility(lang) {
+    document.querySelectorAll('.en-text').forEach(el => {
+      el.classList.toggle('hidden', lang === 'ar');
+    });
+    document.querySelectorAll('.ar-text').forEach(el => {
+      el.classList.toggle('hidden', lang === 'en');
+    });
+  }
 
   toggleBtn.addEventListener('click', () => {
-    if (body.classList.contains('en')) {
-      body.classList.remove('en');
-      body.classList.add('ar');
-      toggleBtn.textContent = 'English';
-      enTexts.forEach(el => el.classList.add('hidden'));
-      arTexts.forEach(el => el.classList.remove('hidden'));
+    if(body.classList.contains('en')) {
+      switchLanguage('ar');
     } else {
-      body.classList.remove('ar');
-      body.classList.add('en');
-      toggleBtn.textContent = 'عربي';
-      enTexts.forEach(el => el.classList.remove('hidden'));
-      arTexts.forEach(el => el.classList.add('hidden'));
+      switchLanguage('en');
     }
   });
+
+  // Start with English by default
+  switchLanguage('en');
 </script>
 
 </body>
