@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>موقع ثنائي اللغة | Bilingual Site</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+    transition: direction 0.3s ease;
+  }
+  .lang-toggle {
+    margin-bottom: 20px;
+  }
+  .ar {
+    direction: rtl;
+    text-align: right;
+  }
+  .en {
+    direction: ltr;
+    text-align: left;
+  }
+  .hidden {
+    display: none;
+  }
+  button {
+    padding: 8px 12px;
+    cursor: pointer;
+  }
+</style>
+</head>
+<body class="en">
+
+<div class="lang-toggle">
+  <button id="toggleLang">عربي</button>
+</div>
+
+<h1 class="en-text">Welcome to our website</h1>
+<h1 class="ar-text hidden">مرحبا بكم في موقعنا</h1>
+
+<p class="en-text">
+  This is a simple bilingual website example.
+</p>
+<p class="ar-text hidden">
+  هذا مثال بسيط لموقع يدعم لغتين.
+</p>
+
+<script>
+  const toggleBtn = document.getElementById('toggleLang');
+  const body = document.body;
+  const enTexts = document.querySelectorAll('.en-text');
+  const arTexts = document.querySelectorAll('.ar-text');
+
+  toggleBtn.addEventListener('click', () => {
+    if (body.classList.contains('en')) {
+      body.classList.remove('en');
+      body.classList.add('ar');
+      toggleBtn.textContent = 'English';
+      enTexts.forEach(el => el.classList.add('hidden'));
+      arTexts.forEach(el => el.classList.remove('hidden'));
+    } else {
+      body.classList.remove('ar');
+      body.classList.add('en');
+      toggleBtn.textContent = 'عربي';
+      enTexts.forEach(el => el.classList.remove('hidden'));
+      arTexts.forEach(el => el.classList.add('hidden'));
+    }
+  });
+</script>
+
+</body>
+</html>
