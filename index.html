@@ -1,259 +1,72 @@
 <!DOCTYPE html>
-<html lang="ar">
+<html lang="en" dir="ltr">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>ShopEase - متجر التسوق السهل</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0; padding: 0;
-      background-color: #f5f5f5;
-      direction: rtl;
-      color: #333;
-    }
-    header {
-      background-color: #008080;
-      color: white;
-      padding: 15px 20px;
-      text-align: center;
-      font-size: 24px;
-      font-weight: bold;
-    }
-    .products {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      padding: 20px;
-      gap: 20px;
-    }
-    .product {
-      background-color: white;
-      border-radius: 8px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
-      width: 220px;
-      padding: 15px;
-      text-align: center;
-      transition: transform 0.2s ease;
-    }
-    .product:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 8px 15px rgba(0,0,0,0.2);
-    }
-    .product img {
-      width: 180px;
-      height: 180px;
-      object-fit: contain;
-      margin-bottom: 10px;
-    }
-    .product h3 {
-      margin: 10px 0 5px;
-    }
-    .price {
-      color: #008080;
-      font-weight: bold;
-      margin-bottom: 10px;
-    }
-    button {
-      background-color: #008080;
-      color: white;
-      border: none;
-      border-radius: 5px;
-      padding: 10px 15px;
-      cursor: pointer;
-      font-weight: bold;
-    }
-    button:hover {
-      background-color: #006666;
-    }
-    #cart {
-      position: fixed;
-      top: 20px;
-      left: 20px;
-      background-color: #008080;
-      color: white;
-      padding: 10px 15px;
-      border-radius: 50px;
-      font-weight: bold;
-      cursor: pointer;
-      user-select: none;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-    }
-    #cart-count {
-      background: #ff4444;
-      border-radius: 50%;
-      padding: 2px 8px;
-      margin-left: 8px;
-      font-size: 14px;
-    }
-    #cart-modal {
-      display: none;
-      position: fixed;
-      top: 60px;
-      left: 50%;
-      transform: translateX(-50%);
-      background: white;
-      width: 300px;
-      max-height: 400px;
-      overflow-y: auto;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.3);
-      border-radius: 8px;
-      padding: 15px;
-      z-index: 1000;
-    }
-    #cart-modal h2 {
-      margin-top: 0;
-      text-align: center;
-    }
-    .cart-item {
-      display: flex;
-      justify-content: space-between;
-      margin-bottom: 10px;
-      border-bottom: 1px solid #eee;
-      padding-bottom: 5px;
-    }
-    .cart-item:last-child {
-      border-bottom: none;
-    }
-    .cart-item-name {
-      font-weight: bold;
-    }
-    .cart-total {
-      font-weight: bold;
-      text-align: right;
-      margin-top: 10px;
-      color: #008080;
-    }
-    #close-cart {
-      background: #ff4444;
-      border: none;
-      color: white;
-      padding: 5px 10px;
-      border-radius: 5px;
-      cursor: pointer;
-      float: right;
-      font-weight: bold;
-      margin-bottom: 10px;
-    }
-  </style>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>موقع ثنائي اللغة | Bilingual Site</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+    transition: direction 0.3s ease;
+  }
+  .lang-toggle {
+    margin-bottom: 20px;
+  }
+  .ar {
+    direction: rtl;
+    text-align: right;
+  }
+  .en {
+    direction: ltr;
+    text-align: left;
+  }
+  .hidden {
+    display: none;
+  }
+  button {
+    padding: 8px 12px;
+    cursor: pointer;
+  }
+</style>
 </head>
-<body>
+<body class="en">
 
-<header>ShopEase - متجر التسوق السهل</header>
-
-<div id="cart">
-  🛒 عربة التسوق <span id="cart-count">0</span>
+<div class="lang-toggle">
+  <button id="toggleLang">عربي</button>
 </div>
 
-<div id="cart-modal">
-  <button id="close-cart">✖ إغلاق</button>
-  <h2>عربة التسوق</h2>
-  <div id="cart-items"></div>
-  <div class="cart-total">المجموع: 0 د.أ</div>
-</div>
+<h1 class="en-text">Welcome to our website</h1>
+<h1 class="ar-text hidden">مرحبا بكم في موقعنا</h1>
 
-<div class="products" id="products-list">
-  <!-- المنتجات سيتم توليدها هنا -->
-</div>
+<p class="en-text">
+  This is a simple bilingual website example.
+</p>
+<p class="ar-text hidden">
+  هذا مثال بسيط لموقع يدعم لغتين.
+</p>
 
 <script>
-  const products = [
-    {
-      id: 1,
-      name: "سماعة رأس بلوتوث",
-      price: 25,
-      img: "https://cdn.pixabay.com/photo/2016/11/29/03/53/headphones-1868855_1280.jpg"
-    },
-    {
-      id: 2,
-      name: "ساعة يد ذكية",
-      price: 45,
-      img: "https://cdn.pixabay.com/photo/2018/05/24/18/22/smartwatch-3429940_1280.jpg"
-    },
-    {
-      id: 3,
-      name: "كاميرا صغيرة",
-      price: 60,
-      img: "https://cdn.pixabay.com/photo/2017/03/31/18/32/camera-2198908_1280.jpg"
-    },
-    {
-      id: 4,
-      name: "مصباح LED قابل للشحن",
-      price: 15,
-      img: "https://cdn.pixabay.com/photo/2017/01/07/23/15/led-1951380_1280.jpg"
-    }
-  ];
+  const toggleBtn = document.getElementById('toggleLang');
+  const body = document.body;
+  const enTexts = document.querySelectorAll('.en-text');
+  const arTexts = document.querySelectorAll('.ar-text');
 
-  const productsList = document.getElementById('products-list');
-  const cartCount = document.getElementById('cart-count');
-  const cartModal = document.getElementById('cart-modal');
-  const cartItemsContainer = document.getElementById('cart-items');
-  const cartTotalElem = document.querySelector('.cart-total');
-  const closeCartBtn = document.getElementById('close-cart');
-  const cartBtn = document.getElementById('cart');
-
-  let cart = [];
-
-  function renderProducts() {
-    productsList.innerHTML = '';
-    products.forEach(product => {
-      const prodDiv = document.createElement('div');
-      prodDiv.className = 'product';
-      prodDiv.innerHTML = `
-        <img src="${product.img}" alt="${product.name}" />
-        <h3>${product.name}</h3>
-        <div class="price">${product.price} د.أ</div>
-        <button onclick="addToCart(${product.id})">أضف إلى العربة</button>
-      `;
-      productsList.appendChild(prodDiv);
-    });
-  }
-
-  function addToCart(id) {
-    const product = products.find(p => p.id === id);
-    const cartItem = cart.find(item => item.id === id);
-    if(cartItem){
-      cartItem.qty++;
+  toggleBtn.addEventListener('click', () => {
+    if (body.classList.contains('en')) {
+      body.classList.remove('en');
+      body.classList.add('ar');
+      toggleBtn.textContent = 'English';
+      enTexts.forEach(el => el.classList.add('hidden'));
+      arTexts.forEach(el => el.classList.remove('hidden'));
     } else {
-      cart.push({...product, qty: 1});
+      body.classList.remove('ar');
+      body.classList.add('en');
+      toggleBtn.textContent = 'عربي';
+      enTexts.forEach(el => el.classList.remove('hidden'));
+      arTexts.forEach(el => el.classList.add('hidden'));
     }
-    updateCartUI();
-  }
-
-  function removeFromCart(id) {
-    cart = cart.filter(item => item.id !== id);
-    updateCartUI();
-  }
-
-  function updateCartUI() {
-    cartCount.textContent = cart.reduce((sum, item) => sum + item.qty, 0);
-    cartItemsContainer.innerHTML = '';
-    let total = 0;
-    cart.forEach(item => {
-      total += item.price * item.qty;
-      const itemDiv = document.createElement('div');
-      itemDiv.className = 'cart-item';
-      itemDiv.innerHTML = `
-        <div class="cart-item-name">${item.name} (x${item.qty})</div>
-        <div>
-          <span>${item.price * item.qty} د.أ</span>
-          <button onclick="removeFromCart(${item.id})" style="margin-left: 10px; background:#ff4444; color:white; border:none; border-radius:3px; cursor:pointer;">حذف</button>
-        </div>
-      `;
-      cartItemsContainer.appendChild(itemDiv);
-    });
-    cartTotalElem.textContent = `المجموع: ${total} د.أ`;
-  }
-
-  cartBtn.addEventListener('click', () => {
-    cartModal.style.display = cartModal.style.display === 'block' ? 'none' : 'block';
   });
-
-  closeCartBtn.addEventListener('click', () => {
-    cartModal.style.display = 'none';
-  });
-
-  renderProducts();
 </script>
 
 </body>
